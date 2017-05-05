@@ -16,8 +16,6 @@
  *   the source map that is tucked away inside webpack's in-memory filesystem.
  *
  */
-require('react-native-browser-polyfill')
-
 import type { $Request, Middleware } from 'express';
 import type { ReactNativeStackFrame, ReactNativeStack } from '../../types';
 
@@ -40,8 +38,17 @@ type ReactNativeSymbolicateResponse = {
  */
 function createSourceMapConsumer(compiler: *) {
   // turns /path/to/use into 'path.to.use'
-  console.log(compiler);
-  const outputPath: string = compiler.options.output.path;
+
+  let outputPath;
+  if (!compiler.options && compiler.compilers && compiler.compilers.length) {
+    outputPath = compiler.compilers[0].options.output.path;
+  } else {
+    outputPath: string = compiler.options.output.path;
+  }
+  if (!outputPath) {
+    throw new Error('no output path')
+  }
+  
   const hops: Array<string> = outputPath
     .split(path.sep)
     .filter((pathPart: string) => pathPart !== ''); // no blanks please
