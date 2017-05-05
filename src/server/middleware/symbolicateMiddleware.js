@@ -43,7 +43,7 @@ function createSourceMapConsumer(compiler: *) {
   if (!compiler.options && compiler.compilers && compiler.compilers.length) {
     outputPath = compiler.compilers[0].options.output.path;
   } else {
-    outputPath: string = compiler.options.output.path;
+    outputPath = compiler.options.output.path;
   }
   if (!outputPath) {
     throw new Error('no output path')
