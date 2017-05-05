@@ -16,6 +16,8 @@
  *   the source map that is tucked away inside webpack's in-memory filesystem.
  *
  */
+require('react-native-browser-polyfill')
+
 import type { $Request, Middleware } from 'express';
 import type { ReactNativeStackFrame, ReactNativeStack } from '../../types';
 
