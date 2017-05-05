@@ -38,6 +38,7 @@ type ReactNativeSymbolicateResponse = {
  */
 function createSourceMapConsumer(compiler: *) {
   // turns /path/to/use into 'path.to.use'
+  console.log(compiler);
   const outputPath: string = compiler.options.output.path;
   const hops: Array<string> = outputPath
     .split(path.sep)
